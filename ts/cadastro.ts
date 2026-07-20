@@ -1,4 +1,8 @@
 
+
+console.log("Sistema iniciado")
+
+
 // PEGA O FORMULÁRIO
 
 const formulario = document.getElementById("cadastro-aluno") as HTMLFormElement;
@@ -108,3 +112,7 @@ formulario.addEventListener("submit", function (event) {
     formulario.reset();
 
 });
+
+
+console.log(alunos);
+
