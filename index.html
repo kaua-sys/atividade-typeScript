@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Atividade Exemplo De TypeScript</title>
-    <script src="ts/cadastro.ts" defer></script>
+    <script src="ts/cadastro.js" defer></script>
     <link rel="stylesheet" href="css/style.css">
 
 </head>
 
 <body>
-    <main id="geral"></main>
+    <main id="geral">
     <h3>Cadastro de Alunos</h3>
     
     <section id="form">
@@ -21,10 +21,10 @@
             <input type="text" name="nome" id="nome" required maxlength="30" placeholder="Nome completo" >
 
             <label for="matricula">Matricula</label>
-            <input type="number" name="matricula" id="matricula" required maxlength="7" placeholder="Número da matricula">
+            <input type="number" name="matricula" id="matricula" required placeholder="Número da matricula">
  
             <label for="turma">Serie/Turma</label>
-            <select name="turma" id="turma">
+            <select name="turma" id="turma" required>
                 <option value="1A">1°A</option>
                 <option value="1B">1°B</option>
                 <option value="1C">1°C</option>
@@ -37,15 +37,19 @@
             </select>
 
             <label for="turno">Turno</label>
-            <select name="turno" id="turno" required placeholder="Escolha seu turno">
+            <select name="turno" id="turno" required>
             <option value="manha">Manhã</option>
             <option value="tarde">Tarde</option>
             <option value="integral">Integral</option>
             </select>
         </form>
 
-        <button type="submit">Enviar cadastro</button>
-        <button type="reset">Limpar formulário</button>
+            <button type="submit">Enviar cadastro</button>
+            <button type="reset">Limpar formulário</button>
+        </form>
+
     </section>
+
+    </main>
 </body>
 </html>
