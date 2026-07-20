@@ -1,5 +1,11 @@
-// Interface do aluno
-interface Aluno {
+// PEGA O FORMULÁRIO PELO ID
+const formulario = document.getElementById("cadastro-aluno") as HTMLFormElement;
+
+
+
+
+// ESTRUTURA DO ARRAY
+    interface Aluno {
     nome: string; 
     matricula: number;
     turma: string;
