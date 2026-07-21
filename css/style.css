@@ -22,7 +22,7 @@ body {
 
 /* TÍTULO */
 
-#geral > h1 {
+#geral>h1 {
     text-align: center;
     color: #1e3a8a;
     font-size: 2rem;
@@ -38,7 +38,7 @@ body {
 }
 
 #logo h1 {
-    color: #1e3a8a;
+    color: #1e328a;
     font-size: 1.8rem;
 }
 
