@@ -6,7 +6,16 @@ console.log("Sistema iniciado")
 // PEGA O FORMULÁRIO
 
 const formulario = document.getElementById("cadastro-aluno") as HTMLFormElement
+console.log(formulario)
+if (formulario) {
 
+    formulario.addEventListener("submit", function (event) {
+
+        // todo o código que já está aqui
+
+    })
+
+}
 
 // CRIANDO OS ELEMENTOS DO ARRAY ALUNO
 interface Aluno {
@@ -80,8 +89,7 @@ return
     // Atualiza a lista
     listarAlunos()
 
-    // Limpa os campos do formulário
-    formulario.reset()
+
 
 });
 
