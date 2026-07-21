@@ -22,7 +22,7 @@ body {
 
 /* TÍTULO */
 
-h3 {
+#geral > h1 {
     text-align: center;
     color: #1e3a8a;
     font-size: 2rem;
@@ -32,15 +32,19 @@ h3 {
 /* CABEÇALHO */
 
 #cabecalho {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    text-align: center;
     margin-bottom: 30px;
+
 }
 
 #logo h1 {
     color: #1e3a8a;
     font-size: 1.8rem;
+}
+
+#menu {
+    margin-top: 30px;
+    text-align: center;
 }
 
 #menu ul {
@@ -49,7 +53,7 @@ h3 {
 
 #menu .links {
     display: inline-block;
-    padding: 10px 18px;
+    padding: 12px 24px;
     background: #2563eb;
     color: #fff;
     text-decoration: none;
