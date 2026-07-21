@@ -1,52 +1,82 @@
 console.log("Sistema iniciado");
 // PEGA O FORMULÁRIO
 const formulario = document.getElementById("cadastro-aluno");
-console.log(formulario);
-if (formulario) {
-    formulario.addEventListener("submit", function (event) {
-        // todo o código que já está aqui
-    });
-}
-// CRIANDO O ARRAY ALUNO
+// ARRAY DE ALUNOS
 let alunos = [];
-// FUNÇÃO PARA CADASTRAR ALUNO
+// CONTROLA A EDIÇÃO
+let indiceEdicao = null;
+// CADASTRAR ALUNO
 function cadastrarAluno(nome, matricula, turma) {
-    // Verifica se já existe um aluno com essa matrícula
     const existe = alunos.find(aluno => aluno.matricula === matricula);
     if (existe) {
         alert("Matrícula já cadastrada!");
         return;
     }
-    // Cria o objeto do aluno
     const novoAluno = {
-        nome, matricula, turma
+        nome,
+        matricula,
+        turma
     };
-    // Adiciona ao array
     alunos.push(novoAluno);
-    console.log("Aluno cadastrado com sucesso!");
 }
-// FUNÇÃO PARA LISTAR ALUNOS
+// LISTAR ALUNOS
 function listarAlunos() {
     return alunos;
 }
+// MOSTRAR OS CARDS
+function mostrarAlunos() {
+    const lista = document.getElementById("lista-alunos");
+    lista.innerHTML = "";
+    alunos.forEach((aluno, indice) => {
+        const card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = `
+            <h3>${aluno.nome}</h3>
+            <p><strong>Matrícula:</strong> ${aluno.matricula}</p>
+            <p><strong>Turma:</strong> ${aluno.turma}</p>
+
+            <button class="editar">Editar</button>
+            <button class="excluir">Excluir</button>
+        `;
+        const btnEditar = card.querySelector(".editar");
+        const btnExcluir = card.querySelector(".excluir");
+        btnEditar.addEventListener("click", () => {
+            document.getElementById("nome").value = aluno.nome,
+                document.getElementById("matricula").value = aluno.matricula.toString(),
+                document.getElementById("turma").value = aluno.turma;
+            indiceEdicao = indice;
+        });
+        btnExcluir.addEventListener("click", () => {
+            alunos.splice(indice, 1);
+            mostrarAlunos();
+        });
+        lista.appendChild(card);
+    });
+}
 // EVENTO DO FORMULÁRIO
 formulario.addEventListener("submit", function (event) {
-    // Impede o recarregamento da página
     event.preventDefault();
-    // Pega os valores digitados
     const nome = document.getElementById("nome").value.trim();
     const matricula = Number(document.getElementById("matricula").value);
-    const turma = document.getElementById("turma").value.trim();
-    // Verifica se os campos foram preenchidos
+    const turma = document.getElementById("turma").value;
     if (nome === "" || turma === "" || matricula === 0) {
         alert("Preencha todos os campos!");
         return;
     }
-    // Cadastra o aluno
-    cadastrarAluno(nome, matricula, turma);
-    // Atualiza a lista
-    listarAlunos();
+    if (indiceEdicao !== null) {
+        alunos[indiceEdicao] = {
+            nome,
+            matricula,
+            turma
+        };
+        indiceEdicao = null;
+    }
+    else {
+        cadastrarAluno(nome, matricula, turma);
+    }
+    mostrarAlunos();
+    formulario.reset();
 });
 console.log(alunos);
-export { cadastrarAluno, listarAlunos, };
+export { cadastrarAluno, listarAlunos };
 //# sourceMappingURL=cadastro.js.map
