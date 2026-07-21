@@ -46,19 +46,9 @@ function cadastrarAluno(nome: string, matricula: number, turma: string): void {
 
 // FUNÇÃO PARA LISTAR ALUNOS
 
-function listarAlunos(): void {
+function listarAlunos(): Aluno[] {
 
-    const lista = document.getElementById("lista-alunos") as HTMLDivElement
-
-        if (alunos.length === 0) {
-
-    return
-    }
-
-    alunos.forEach((aluno, index) => {
-
-    })
-
+        return alunos
 }
 
 
