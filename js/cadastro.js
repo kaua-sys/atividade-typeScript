@@ -6,7 +6,7 @@ let alunos = [];
 // CONTROLA A EDIÇÃO
 let indiceEdicao = null;
 // CADASTRAR ALUNO
-function cadastrarAluno(nome, matricula, turma) {
+function cadastrarAluno(nome, matricula, turma, turno) {
     const existe = alunos.find(aluno => aluno.matricula === matricula);
     if (existe) {
         alert("Matrícula já cadastrada!");
@@ -15,7 +15,8 @@ function cadastrarAluno(nome, matricula, turma) {
     const novoAluno = {
         nome,
         matricula,
-        turma
+        turma,
+        turno
     };
     alunos.push(novoAluno);
 }
@@ -34,6 +35,7 @@ function mostrarAlunos() {
             <h3>${aluno.nome}</h3>
             <p><strong>Matrícula:</strong> ${aluno.matricula}</p>
             <p><strong>Turma:</strong> ${aluno.turma}</p>
+            <p><strong>Turno:</strong> ${aluno.turno}</p>
 
             <button class="editar">Editar</button>
             <button class="excluir">Excluir</button>
@@ -41,9 +43,10 @@ function mostrarAlunos() {
         const btnEditar = card.querySelector(".editar");
         const btnExcluir = card.querySelector(".excluir");
         btnEditar.addEventListener("click", () => {
-            document.getElementById("nome").value = aluno.nome,
-                document.getElementById("matricula").value = aluno.matricula.toString(),
-                document.getElementById("turma").value = aluno.turma;
+            document.getElementById("nome").value = aluno.nome;
+            document.getElementById("matricula").value = aluno.matricula.toString();
+            document.getElementById("turma").value = aluno.turma;
+            document.getElementById("turno").value = aluno.turno;
             indiceEdicao = indice;
         });
         btnExcluir.addEventListener("click", () => {
@@ -59,6 +62,7 @@ formulario.addEventListener("submit", function (event) {
     const nome = document.getElementById("nome").value.trim();
     const matricula = Number(document.getElementById("matricula").value);
     const turma = document.getElementById("turma").value;
+    const turno = document.getElementById("turno").value;
     if (nome === "" || turma === "" || matricula === 0) {
         alert("Preencha todos os campos!");
         return;
@@ -67,12 +71,13 @@ formulario.addEventListener("submit", function (event) {
         alunos[indiceEdicao] = {
             nome,
             matricula,
-            turma
+            turma,
+            turno
         };
         indiceEdicao = null;
     }
     else {
-        cadastrarAluno(nome, matricula, turma);
+        cadastrarAluno(nome, matricula, turma, turno);
     }
     mostrarAlunos();
     formulario.reset();
