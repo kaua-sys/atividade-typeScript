@@ -8,6 +8,7 @@ interface Aluno {
     nome: string
     matricula: number
     turma: string
+    turno: string
 }
 
 // ARRAY DE ALUNOS
@@ -17,7 +18,7 @@ let alunos: Aluno[] = []
 let indiceEdicao: number | null = null
 
 // CADASTRAR ALUNO
-function cadastrarAluno(nome: string, matricula: number, turma: string): void {
+function cadastrarAluno(nome: string, matricula: number, turma: string, turno: string): void {
 
     const existe = alunos.find(aluno => aluno.matricula === matricula)
 
@@ -29,7 +30,8 @@ function cadastrarAluno(nome: string, matricula: number, turma: string): void {
     const novoAluno: Aluno = {
         nome,
         matricula,
-        turma
+        turma,
+        turno
     }
 
     alunos.push(novoAluno)
@@ -56,6 +58,7 @@ function mostrarAlunos(): void {
             <h3>${aluno.nome}</h3>
             <p><strong>Matrícula:</strong> ${aluno.matricula}</p>
             <p><strong>Turma:</strong> ${aluno.turma}</p>
+            <p><strong>Turno:</strong> ${aluno.turno}</p>
 
             <button class="editar">Editar</button>
             <button class="excluir">Excluir</button>
@@ -66,9 +69,10 @@ function mostrarAlunos(): void {
 
         btnEditar.addEventListener("click", () => {
 
-            (document.getElementById("nome") as HTMLInputElement).value = aluno.nome,
-            (document.getElementById("matricula") as HTMLInputElement).value = aluno.matricula.toString(),
-            (document.getElementById("turma") as HTMLSelectElement).value = aluno.turma
+            (document.getElementById("nome") as HTMLInputElement).value = aluno.nome
+            ;(document.getElementById("matricula") as HTMLInputElement).value = aluno.matricula.toString()
+            ;(document.getElementById("turma") as HTMLSelectElement).value = aluno.turma
+            ;(document.getElementById("turno") as HTMLSelectElement).value = aluno.turno
 
             indiceEdicao = indice
 
@@ -84,6 +88,7 @@ function mostrarAlunos(): void {
         lista.appendChild(card)
 
     })
+
 }
 
 // EVENTO DO FORMULÁRIO
@@ -99,6 +104,8 @@ formulario.addEventListener("submit", function (event) {
 
     const turma = (document.getElementById("turma") as HTMLSelectElement).value
 
+    const turno = (document.getElementById("turno") as HTMLSelectElement).value
+
     if (nome === "" || turma === "" || matricula === 0) {
         alert("Preencha todos os campos!")
         return
@@ -109,14 +116,15 @@ formulario.addEventListener("submit", function (event) {
         alunos[indiceEdicao] = {
             nome,
             matricula,
-            turma
+            turma,
+            turno
         }
 
         indiceEdicao = null
 
     } else {
 
-        cadastrarAluno(nome, matricula, turma)
+        cadastrarAluno(nome, matricula, turma, turno)
 
     }
 
