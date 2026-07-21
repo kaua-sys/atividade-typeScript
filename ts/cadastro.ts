@@ -98,3 +98,4 @@ return
 
 console.log(alunos)
 
+export {cadastrarAluno, listarAlunos,}
