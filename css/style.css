@@ -6,13 +6,15 @@
     box-sizing: border-box;
 }
 
+/* Estilo geral da página */
+
 body {
     font-family: Arial, Helvetica, sans-serif;
     background: #f1f5f9;
     color: #333;
 }
 
-/* CONTAINER */
+/* Container principal */
 
 #geral {
     max-width: 700px;
@@ -20,7 +22,7 @@ body {
     padding: 30px;
 }
 
-/* TÍTULO */
+/* Título principal */
 
 #geral>h1 {
     text-align: center;
@@ -29,18 +31,21 @@ body {
     margin-bottom: 25px;
 }
 
-/* CABEÇALHO */
+/* Cabeçalho */
 
 #cabecalho {
     text-align: center;
     margin-bottom: 30px;
-
 }
+
+/* Logo */
 
 #logo h1 {
     color: #1e328a;
     font-size: 1.8rem;
 }
+
+/* Menu */
 
 #menu {
     margin-top: 30px;
@@ -50,6 +55,8 @@ body {
 #menu ul {
     list-style: none;
 }
+
+/* Botão do menu */
 
 #menu .links {
     display: inline-block;
@@ -66,7 +73,7 @@ body {
     background: #1d4ed8;
 }
 
-/* FORMULÁRIO */
+/* Formulário */
 
 #form {
     background: #fff;
@@ -75,6 +82,8 @@ body {
     box-shadow: 0 8px 20px rgba(0, 0, 0, .12);
 }
 
+/* Labels */
+
 label {
     display: block;
     margin-top: 18px;
@@ -82,6 +91,8 @@ label {
     font-weight: bold;
     color: #374151;
 }
+
+/* Campos */
 
 input,
 select {
@@ -93,6 +104,8 @@ select {
     transition: .3s;
 }
 
+/* Efeito ao selecionar o campo */
+
 input:focus,
 select:focus {
     outline: none;
@@ -100,7 +113,7 @@ select:focus {
     box-shadow: 0 0 8px rgba(37, 99, 235, .25);
 }
 
-/* BOTÕES */
+/* Botões */
 
 button {
     width: 100%;
@@ -114,6 +127,8 @@ button {
     transition: .3s;
 }
 
+/* Botão enviar */
+
 button[type="submit"] {
     background: #2563eb;
     color: white;
@@ -122,6 +137,8 @@ button[type="submit"] {
 button[type="submit"]:hover {
     background: #1d4ed8;
 }
+
+/* Botão limpar */
 
 button[type="reset"] {
     background: #dc2626;
@@ -132,7 +149,7 @@ button[type="reset"]:hover {
     background: #b91c1c;
 }
 
-/* AVISO */
+/* Aviso */
 
 #menu {
     margin-top: 30px;
@@ -146,7 +163,7 @@ button[type="reset"]:hover {
     line-height: 1.5;
 }
 
-/* PESQUISA */
+/* Campo de pesquisa */
 
 #pesquisa {
     margin-top: 35px;
@@ -168,7 +185,7 @@ button[type="reset"]:hover {
     box-shadow: 0 0 8px rgba(37,99,235,.25);
 }
 
-/* LISTA DE ALUNOS */
+/* Lista dos alunos */
 
 #lista-alunos {
     display: flex;
@@ -177,7 +194,7 @@ button[type="reset"]:hover {
     margin-top: 20px;
 }
 
-/* CARD */
+/* Card do aluno */
 
 .card {
     background: #fff;
@@ -187,22 +204,28 @@ button[type="reset"]:hover {
     border-left: 6px solid #2563eb;
 }
 
+/* Título do card */
+
 .card h3 {
     color: #1e3a8a;
     margin-bottom: 12px;
 }
+
+/* Informações do card */
 
 .card p {
     margin: 6px 0;
     color: #374151;
 }
 
-/* BOTÕES DOS CARDS */
+/* Botões do card */
 
 .card button {
     width: 100%;
     margin-top: 12px;
 }
+
+/* Botão editar */
 
 .card .editar {
     background: #2563eb;
@@ -213,6 +236,8 @@ button[type="reset"]:hover {
     background: #1d4ed8;
 }
 
+/* Botão excluir */
+
 .card .excluir {
     background: #dc2626;
     color: white;
@@ -222,7 +247,7 @@ button[type="reset"]:hover {
     background: #b91c1c;
 }
 
-/* RESPONSIVO */
+/* Responsividade */
 
 @media (max-width:768px) {
 
@@ -241,13 +266,17 @@ button[type="reset"]:hover {
 
 }
 
-input[type ="number"] {
+/* Remove as setinhas do input number */
+
+input[type="number"] {
     appearance: textfield;
-    -moz-appearance: textfield
+    -moz-appearance: textfield;
 }
 
-input[type = "number"]::-webkit-inner-spin-button,
-input[type = "number"]::-webkit-outer-spin-button{
+/* Remove as setinhas no Chrome, Edge e Safari */
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
