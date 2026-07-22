@@ -1,6 +1,7 @@
 console.log("Sistema iniciado");
 // PEGA O FORMULÁRIO
 const formulario = document.getElementById("cadastro-aluno");
+const pesquisa = document.getElementById("campo-pesquisa");
 // ARRAY DE ALUNOS E CONTROLE DE EDIÇÃO
 let alunos = [];
 let indiceEdicao = null;
@@ -34,10 +35,12 @@ function listarAlunos() {
     return alunos;
 }
 // MOSTRAR OS CARDS NA TELA
-function mostrarAlunos() {
+function mostrarAlunos(filtro = "") {
     const lista = document.getElementById("lista-alunos");
     lista.innerHTML = "";
-    alunos.forEach((aluno, indice) => {
+    const alunosFiltrados = alunos.filter(aluno => aluno.nome.toLowerCase().includes(filtro.toLowerCase()));
+    alunosFiltrados.forEach((aluno) => {
+        const indice = alunos.findIndex(a => a.matricula === aluno.matricula);
         const card = document.createElement("div");
         card.className = "card";
         card.innerHTML = `
@@ -61,13 +64,16 @@ function mostrarAlunos() {
         btnExcluir.addEventListener("click", () => {
             alunos.splice(indice, 1);
             salvarAlunos();
-            mostrarAlunos();
+            mostrarAlunos(pesquisa.value);
         });
         lista.appendChild(card);
     });
-    // Exibe no console a lista atualizada toda vez que os cards redesenham
     console.log("Alunos cadastrados:", alunos);
 }
+// EVENTO DA PESQUISA
+pesquisa.addEventListener("input", () => {
+    mostrarAlunos(pesquisa.value);
+});
 // --- EVENTO DO FORMULÁRIO ---
 formulario.addEventListener("submit", function (event) {
     event.preventDefault();
@@ -75,7 +81,7 @@ formulario.addEventListener("submit", function (event) {
     const matricula = Number(document.getElementById("matricula").value);
     const turma = document.getElementById("turma").value;
     const turno = document.getElementById("turno").value;
-    if (nome === "nome:" || turma === "" || matricula === 0) {
+    if (nome === "" || turma === "" || matricula === 0) {
         alert("Preencha todos os campos!");
         return;
     }
@@ -92,11 +98,10 @@ formulario.addEventListener("submit", function (event) {
     else {
         cadastrarAluno(nome, matricula, turma, turno);
     }
-    mostrarAlunos();
+    mostrarAlunos(pesquisa.value);
     formulario.reset();
 });
-// --- INICIALIZAÇÃO ---
-// Carrega os dados salvos e renderiza na tela assim que o script abre
+// INICIALIZAÇÃO
 carregarAlunos();
 mostrarAlunos();
 export { cadastrarAluno, listarAlunos };
