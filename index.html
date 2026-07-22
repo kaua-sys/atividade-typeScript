@@ -2,36 +2,47 @@
 <html lang="pt-br">
 
 <head>
+    <!-- Configurações da página -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Atividade Exemplo De TypeScript</title>
+
+    <!-- CSS -->
     <link rel="stylesheet" href="css/style.css">
+
+    <!-- JavaScript -->
     <script src="js/cadastro.js" type="module" defer></script>
 
 </head>
 
 <body>
     <main id="geral">
+
+        <!-- Título -->
         <h1>Cadastro de Alunos</h1>
 
+        <!-- Cabeçalho -->
         <header id="cabecalho">
-
             <div id="logo">
                 <h1>Sistema Escolar</h1>
             </div>
-
         </header>
 
         <section id="form">
 
+            <!-- Formulário -->
             <form id="cadastro-aluno">
 
+                <!-- Nome -->
                 <label for="nome">Nome Completo</label>
                 <input type="text" name="nome" id="nome" required maxlength="30" placeholder="Nome completo">
 
+                <!-- Matrícula -->
                 <label for="matricula">Matricula</label>
                 <input type="number" name="matricula" id="matricula" required placeholder="Número da matricula">
 
+                <!-- Turma -->
                 <label for="turma">Serie/Turma</label>
                 <select name="turma" id="turma" required>
                     <option value="1A">1°A</option>
@@ -45,6 +56,7 @@
                     <option value="3C">3°C</option>
                 </select>
 
+                <!-- Turno -->
                 <label for="turno">Turno</label>
                 <select name="turno" id="turno" required>
                     <option value="manha">Manhã</option>
@@ -52,22 +64,32 @@
                     <option value="integral">Integral</option>
                 </select>
 
+                <!-- Botões -->
                 <button type="submit">Enviar cadastro</button>
                 <button type="reset">Limpar formulário</button>
             </form>
 
+            <!-- Aviso -->
             <nav id="menu">
                 <ul>
-                    <h3>"Após clicar em "Editar" em um alunos cadastrado precione a tecla "Enter" para salver a edição</h3>
+                    <h3>"Após clicar em "Editar" em um aluno cadastrado pressione a tecla "Enter" para salvar a edição."</h3>
                 </ul>
             </nav>
 
+            <!-- Pesquisa -->
+            <section id="pesquisa">
+                <input type="text"
+                    name="pesquisa"
+                    id="campo-pesquisa"
+                    class="input-pesquisa"
+                    placeholder="Digite o nome do aluno">
+            </section>
 
         </section>
 
-
-        
         <div id="lista-alunos">
+
+
 
     </div>
 
