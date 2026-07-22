@@ -11,6 +11,8 @@ interface Aluno {
     turno: string
 }
 
+
+
 // ARRAY DE ALUNOS E CONTROLE DE EDIÇÃO
 let alunos: Aluno[] = []
 let indiceEdicao: number | null = null
@@ -21,6 +23,8 @@ function salvarAlunos(): void {
     localStorage.setItem("alunos", JSON.stringify(alunos))
 }
 
+
+
 function carregarAlunos(): void {
     const dados = localStorage.getItem("alunos")
     if (dados) {
@@ -28,7 +32,9 @@ function carregarAlunos(): void {
     }
 }
 
-// --- FUNÇÕES DE NEGÓCIO ---
+
+
+// FUNÇÕES DE NEGÓCIO 
 
 function cadastrarAluno(nome: string, matricula: number, turma: string, turno: string): void {
     const existe = alunos.find(aluno => aluno.matricula === matricula)
@@ -49,9 +55,13 @@ function cadastrarAluno(nome: string, matricula: number, turma: string, turno: s
     salvarAlunos()
 }
 
+
+
 function listarAlunos(): Aluno[] {
     return alunos
 }
+
+
 
 // MOSTRAR OS CARDS NA TELA
 function mostrarAlunos(): void {
@@ -63,6 +73,7 @@ function mostrarAlunos(): void {
         card.className = "card"
 
         card.innerHTML = `
+
             <h3>${aluno.nome}</h3>
             <p><strong>Matrícula:</strong> ${aluno.matricula}</p>
             <p><strong>Turma:</strong> ${aluno.turma}</p>
@@ -76,6 +87,7 @@ function mostrarAlunos(): void {
         const btnExcluir = card.querySelector(".excluir") as HTMLButtonElement
 
         btnEditar.addEventListener("click", () => {
+            
             (document.getElementById("nome") as HTMLInputElement).value = aluno.nome
             ;(document.getElementById("matricula") as HTMLInputElement).value = aluno.matricula.toString()
             ;(document.getElementById("turma") as HTMLSelectElement).value = aluno.turma
@@ -97,6 +109,8 @@ function mostrarAlunos(): void {
     console.log("Alunos cadastrados:", alunos)
 }
 
+
+
 // --- EVENTO DO FORMULÁRIO ---
 
 formulario.addEventListener("submit", function (event) {
@@ -113,7 +127,7 @@ formulario.addEventListener("submit", function (event) {
     }
 
     if (indiceEdicao !== null) {
-        alunos[indiceEdicao] = {
+        alunos[indiceEdicao] = {    
             nome,
             matricula,
             turma,
@@ -129,7 +143,9 @@ formulario.addEventListener("submit", function (event) {
     formulario.reset()
 })
 
-// --- INICIALIZAÇÃO ---
+
+
+// INICIALIZAÇÃO 
 // Carrega os dados salvos e renderiza na tela assim que o script abre
 carregarAlunos()
 mostrarAlunos()

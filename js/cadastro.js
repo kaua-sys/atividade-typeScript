@@ -75,7 +75,7 @@ formulario.addEventListener("submit", function (event) {
     const matricula = Number(document.getElementById("matricula").value);
     const turma = document.getElementById("turma").value;
     const turno = document.getElementById("turno").value;
-    if (nome === "" || turma === "" || matricula === 0) {
+    if (nome === "nome:" || turma === "" || matricula === 0) {
         alert("Preencha todos os campos!");
         return;
     }
