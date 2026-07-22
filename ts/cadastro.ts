@@ -2,6 +2,7 @@ console.log("Sistema iniciado")
 
 // PEGA O FORMULÁRIO
 const formulario = document.getElementById("cadastro-aluno") as HTMLFormElement
+const pesquisa = document.getElementById("campo-pesquisa") as HTMLInputElement
 
 // INTERFACE
 interface Aluno {
@@ -54,11 +55,17 @@ function listarAlunos(): Aluno[] {
 }
 
 // MOSTRAR OS CARDS NA TELA
-function mostrarAlunos(): void {
+function mostrarAlunos(filtro: string = ""): void {
     const lista = document.getElementById("lista-alunos") as HTMLDivElement
     lista.innerHTML = ""
 
-    alunos.forEach((aluno, indice) => {
+    const alunosFiltrados = alunos.filter(aluno =>
+        aluno.nome.toLowerCase().includes(filtro.toLowerCase())
+    )
+
+    alunosFiltrados.forEach((aluno) => {
+        const indice = alunos.findIndex(a => a.matricula === aluno.matricula)
+
         const card = document.createElement("div")
         card.className = "card"
 
@@ -87,15 +94,19 @@ function mostrarAlunos(): void {
         btnExcluir.addEventListener("click", () => {
             alunos.splice(indice, 1)
             salvarAlunos()
-            mostrarAlunos()
+            mostrarAlunos(pesquisa.value)
         })
 
         lista.appendChild(card)
     })
 
-    // Exibe no console a lista atualizada toda vez que os cards redesenham
     console.log("Alunos cadastrados:", alunos)
 }
+
+// EVENTO DA PESQUISA
+pesquisa.addEventListener("input", () => {
+    mostrarAlunos(pesquisa.value)
+})
 
 // --- EVENTO DO FORMULÁRIO ---
 
@@ -119,18 +130,18 @@ formulario.addEventListener("submit", function (event) {
             turma,
             turno
         }
+
         indiceEdicao = null
         salvarAlunos()
     } else {
         cadastrarAluno(nome, matricula, turma, turno)
     }
 
-    mostrarAlunos()
+    mostrarAlunos(pesquisa.value)
     formulario.reset()
 })
 
-// --- INICIALIZAÇÃO ---
-// Carrega os dados salvos e renderiza na tela assim que o script abre
+// INICIALIZAÇÃO
 carregarAlunos()
 mostrarAlunos()
 
