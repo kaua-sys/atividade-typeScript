@@ -1,11 +1,20 @@
 console.log("Sistema iniciado");
 // PEGA O FORMULÁRIO
 const formulario = document.getElementById("cadastro-aluno");
-// ARRAY DE ALUNOS
+// ARRAY DE ALUNOS E CONTROLE DE EDIÇÃO
 let alunos = [];
-// CONTROLA A EDIÇÃO
 let indiceEdicao = null;
-// CADASTRAR ALUNO
+// --- FUNÇÕES DE PERSISTÊNCIA (LOCALSTORAGE) ---
+function salvarAlunos() {
+    localStorage.setItem("alunos", JSON.stringify(alunos));
+}
+function carregarAlunos() {
+    const dados = localStorage.getItem("alunos");
+    if (dados) {
+        alunos = JSON.parse(dados);
+    }
+}
+// --- FUNÇÕES DE NEGÓCIO ---
 function cadastrarAluno(nome, matricula, turma, turno) {
     const existe = alunos.find(aluno => aluno.matricula === matricula);
     if (existe) {
@@ -19,12 +28,12 @@ function cadastrarAluno(nome, matricula, turma, turno) {
         turno
     };
     alunos.push(novoAluno);
+    salvarAlunos();
 }
-// LISTAR ALUNOS
 function listarAlunos() {
     return alunos;
 }
-// MOSTRAR OS CARDS
+// MOSTRAR OS CARDS NA TELA
 function mostrarAlunos() {
     const lista = document.getElementById("lista-alunos");
     lista.innerHTML = "";
@@ -51,12 +60,15 @@ function mostrarAlunos() {
         });
         btnExcluir.addEventListener("click", () => {
             alunos.splice(indice, 1);
+            salvarAlunos();
             mostrarAlunos();
         });
         lista.appendChild(card);
     });
+    // Exibe no console a lista atualizada toda vez que os cards redesenham
+    console.log("Alunos cadastrados:", alunos);
 }
-// EVENTO DO FORMULÁRIO
+// --- EVENTO DO FORMULÁRIO ---
 formulario.addEventListener("submit", function (event) {
     event.preventDefault();
     const nome = document.getElementById("nome").value.trim();
@@ -75,6 +87,7 @@ formulario.addEventListener("submit", function (event) {
             turno
         };
         indiceEdicao = null;
+        salvarAlunos();
     }
     else {
         cadastrarAluno(nome, matricula, turma, turno);
@@ -82,6 +95,9 @@ formulario.addEventListener("submit", function (event) {
     mostrarAlunos();
     formulario.reset();
 });
-console.log(alunos);
+// --- INICIALIZAÇÃO ---
+// Carrega os dados salvos e renderiza na tela assim que o script abre
+carregarAlunos();
+mostrarAlunos();
 export { cadastrarAluno, listarAlunos };
 //# sourceMappingURL=cadastro.js.map
