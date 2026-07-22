@@ -11,15 +11,26 @@ interface Aluno {
     turno: string
 }
 
-// ARRAY DE ALUNOS
+// ARRAY DE ALUNOS E CONTROLE DE EDIÇÃO
 let alunos: Aluno[] = []
-
-// CONTROLA A EDIÇÃO
 let indiceEdicao: number | null = null
 
-// CADASTRAR ALUNO
-function cadastrarAluno(nome: string, matricula: number, turma: string, turno: string): void {
+// --- FUNÇÕES DE PERSISTÊNCIA (LOCALSTORAGE) ---
 
+function salvarAlunos(): void {
+    localStorage.setItem("alunos", JSON.stringify(alunos))
+}
+
+function carregarAlunos(): void {
+    const dados = localStorage.getItem("alunos")
+    if (dados) {
+        alunos = JSON.parse(dados)
+    }
+}
+
+// --- FUNÇÕES DE NEGÓCIO ---
+
+function cadastrarAluno(nome: string, matricula: number, turma: string, turno: string): void {
     const existe = alunos.find(aluno => aluno.matricula === matricula)
 
     if (existe) {
@@ -35,22 +46,19 @@ function cadastrarAluno(nome: string, matricula: number, turma: string, turno: s
     }
 
     alunos.push(novoAluno)
+    salvarAlunos()
 }
 
-// LISTAR ALUNOS
 function listarAlunos(): Aluno[] {
     return alunos
 }
 
-// MOSTRAR OS CARDS
+// MOSTRAR OS CARDS NA TELA
 function mostrarAlunos(): void {
-
     const lista = document.getElementById("lista-alunos") as HTMLDivElement
-
     lista.innerHTML = ""
 
     alunos.forEach((aluno, indice) => {
-
         const card = document.createElement("div")
         card.className = "card"
 
@@ -68,42 +76,35 @@ function mostrarAlunos(): void {
         const btnExcluir = card.querySelector(".excluir") as HTMLButtonElement
 
         btnEditar.addEventListener("click", () => {
-
             (document.getElementById("nome") as HTMLInputElement).value = aluno.nome
             ;(document.getElementById("matricula") as HTMLInputElement).value = aluno.matricula.toString()
             ;(document.getElementById("turma") as HTMLSelectElement).value = aluno.turma
             ;(document.getElementById("turno") as HTMLSelectElement).value = aluno.turno
 
             indiceEdicao = indice
-
         })
 
         btnExcluir.addEventListener("click", () => {
-
             alunos.splice(indice, 1)
+            salvarAlunos()
             mostrarAlunos()
-
         })
 
         lista.appendChild(card)
-
     })
 
+    // Exibe no console a lista atualizada toda vez que os cards redesenham
+    console.log("Alunos cadastrados:", alunos)
 }
 
-// EVENTO DO FORMULÁRIO
-formulario.addEventListener("submit", function (event) {
+// --- EVENTO DO FORMULÁRIO ---
 
+formulario.addEventListener("submit", function (event) {
     event.preventDefault()
 
     const nome = (document.getElementById("nome") as HTMLInputElement).value.trim()
-
-    const matricula = Number(
-        (document.getElementById("matricula") as HTMLInputElement).value
-    )
-
+    const matricula = Number((document.getElementById("matricula") as HTMLInputElement).value)
     const turma = (document.getElementById("turma") as HTMLSelectElement).value
-
     const turno = (document.getElementById("turno") as HTMLSelectElement).value
 
     if (nome === "" || turma === "" || matricula === 0) {
@@ -112,28 +113,25 @@ formulario.addEventListener("submit", function (event) {
     }
 
     if (indiceEdicao !== null) {
-
         alunos[indiceEdicao] = {
             nome,
             matricula,
             turma,
             turno
         }
-
         indiceEdicao = null
-
+        salvarAlunos()
     } else {
-
         cadastrarAluno(nome, matricula, turma, turno)
-
     }
 
     mostrarAlunos()
-
     formulario.reset()
-
 })
 
-console.log(alunos)
+// --- INICIALIZAÇÃO ---
+// Carrega os dados salvos e renderiza na tela assim que o script abre
+carregarAlunos()
+mostrarAlunos()
 
 export { cadastrarAluno, listarAlunos }
