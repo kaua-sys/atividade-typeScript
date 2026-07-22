@@ -38,7 +38,11 @@ function listarAlunos() {
 function mostrarAlunos(filtro = "") {
     const lista = document.getElementById("lista-alunos");
     lista.innerHTML = "";
-    const alunosFiltrados = alunos.filter(aluno => aluno.nome.toLowerCase().includes(filtro.toLowerCase()));
+    // 1. Filtra pelo nome
+    // 2. Ordena em ordem alfabética (A-Z) pelo nome do aluno
+    const alunosFiltrados = alunos
+        .filter(aluno => aluno.nome.toLowerCase().includes(filtro.toLowerCase()))
+        .sort((a, b) => a.nome.localeCompare(b.nome));
     alunosFiltrados.forEach((aluno) => {
         const indice = alunos.findIndex(a => a.matricula === aluno.matricula);
         const card = document.createElement("div");
