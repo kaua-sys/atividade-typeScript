@@ -168,6 +168,60 @@ button[type="reset"]:hover {
     box-shadow: 0 0 8px rgba(37,99,235,.25);
 }
 
+/* LISTA DE ALUNOS */
+
+#lista-alunos {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+/* CARD */
+
+.card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,.12);
+    border-left: 6px solid #2563eb;
+}
+
+.card h3 {
+    color: #1e3a8a;
+    margin-bottom: 12px;
+}
+
+.card p {
+    margin: 6px 0;
+    color: #374151;
+}
+
+/* BOTÕES DOS CARDS */
+
+.card button {
+    width: 100%;
+    margin-top: 12px;
+}
+
+.card .editar {
+    background: #2563eb;
+    color: white;
+}
+
+.card .editar:hover {
+    background: #1d4ed8;
+}
+
+.card .excluir {
+    background: #dc2626;
+    color: white;
+}
+
+.card .excluir:hover {
+    background: #b91c1c;
+}
+
 /* RESPONSIVO */
 
 @media (max-width:768px) {
